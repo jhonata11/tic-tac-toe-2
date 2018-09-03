@@ -1,5 +1,5 @@
 const { expect } = require('chai');
-const Game = require('../src/game');
+const Game = require('../src/controller/game');
 
 describe('--- game', () => {
   it('should create a default game', () => {

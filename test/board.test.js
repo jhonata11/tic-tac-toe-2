@@ -1,5 +1,5 @@
 const { expect } = require('chai');
-const { createBoard, checkWinner } = require('../src/board');
+const { createBoard, checkWinner } = require('../src/controller/board');
 
 
 describe('--- createBoard', () => {

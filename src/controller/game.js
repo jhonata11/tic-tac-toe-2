@@ -1,5 +1,5 @@
 const { createBoard, checkWinner } = require('./board');
-const State = require('./state');
+const State = require('../models/state');
 
 class Game {
   constructor(size = 5, players = ['X', 'O', 'T']) {
