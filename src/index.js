@@ -69,3 +69,10 @@ rl.on('line', (line) => {
   }
   rl.prompt();
 }).on('close', () => process.exit(0));
+
+
+
+// miniMax = (board, size) => {
+//   const line = board.map((row, i) => row.filter((el, j) => e));
+//   return { row: 0, col: 1 }
+// }
