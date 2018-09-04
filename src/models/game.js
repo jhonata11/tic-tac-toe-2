@@ -7,7 +7,6 @@ class Game {
     this.players = players;
     this.currentPlayerId = 0;
     this.states = [];
-    this.init();
   }
 
   get board() {
@@ -22,7 +21,7 @@ class Game {
     return this.players[this.currentPlayerId];
   }
 
-  init() {
+  start() {
     this.states = [new State(createBoard(this.size), null, null)];
     this.currentPlayerId = 0;
   }

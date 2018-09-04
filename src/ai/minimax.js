@@ -32,7 +32,7 @@ const evaluateLevel = (level, move) => {
   return value;
 };
 
-const possibleBoards = (board, moves) => (
+const availableBoards = (board, moves) => (
   moves.map((move) => {
     const newBoard = board.map(row => [...row]);
     newBoard[move.row][move.col] = 'T';
@@ -40,7 +40,7 @@ const possibleBoards = (board, moves) => (
   })
 );
 
-const possibleMoves = (board) => {
+const availableMoves = (board) => {
   const moves = [];
   board.forEach((row, i) => {
     row.forEach((col, j) => {
@@ -54,7 +54,7 @@ const possibleMoves = (board) => {
 
 module.exports = {
   nextMove: (originalBoard) => {
-    const tree = possibleBoards(originalBoard, possibleMoves(originalBoard));
+    const tree = availableBoards(originalBoard, availableMoves(originalBoard));
     tree.sort((e1, e2) => e1.evaluation < e2.evaluation);
     return tree[0].move;
   },

@@ -1,9 +1,9 @@
 const { expect } = require('chai');
 const { createBoard } = require('../src/models/board');
-const minimax = require('../src/controller/minimax');
+const minimax = require('../src/ai/minimax');
 
 describe('Minimax', () => {
-  it('teste', () => {
+  it('T1', () => {
     const board = createBoard(3);
     board[0][0] = 'X';
     const move = minimax.nextMove(board);
