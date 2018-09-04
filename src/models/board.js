@@ -29,6 +29,7 @@ const validateDirection = (board, move, getCurrentPosition) => {
 
 
 module.exports = {
+  emptyField,
   createBoard: (size) => {
     if (size < 3 || size > 10) {
       throw Error('Board length should be between 0 and 3');

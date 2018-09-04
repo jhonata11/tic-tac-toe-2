@@ -1,5 +1,5 @@
 const { expect } = require('chai');
-const { createBoard, checkWinner } = require('../src/controller/board');
+const { createBoard, checkWinner, emptyField } = require('../src/models/board');
 
 
 describe('--- createBoard', () => {
@@ -8,7 +8,7 @@ describe('--- createBoard', () => {
     const board = createBoard(size);
     expect(board).to.have.length(size);
     board.forEach((row) => {
-      row.forEach(col => expect(col).to.equal(' '));
+      row.forEach(col => expect(col).to.equal(emptyField));
       expect(row).to.have.length(size);
     });
   });

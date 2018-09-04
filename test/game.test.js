@@ -1,5 +1,5 @@
 const { expect } = require('chai');
-const Game = require('../src/controller/game');
+const Game = require('../src/models/game');
 
 describe('--- game', () => {
   it('should create a default game', () => {
@@ -54,6 +54,16 @@ describe('--- game', () => {
     game.undoMove();
     expect(game.states).to.have.length(2);
     expect(game.currentPlayerId).to.eql(1);
+  });
+
+  it('should reset stop undo if theres no state left', () => {
+    const game = new Game();
+    // assert first move
+    game.makeMove({ row: 0, col: 0 });
+    game.undoMove();
+    game.undoMove();
+    expect(game.states).to.have.length(1);
+    expect(game.currentPlayerId).to.eql(0);
   });
 
   describe('Winning', () => {

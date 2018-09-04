@@ -1,0 +1,17 @@
+{
+  "players": [
+    {
+      "name": "X",
+      "human": true
+    },
+    {
+      "name": "O",
+      "human": true
+    },
+    {
+      "name": "T",
+      "human": false
+    }
+  ],
+  "gameSize": 3
+}

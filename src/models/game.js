@@ -1,5 +1,5 @@
-const { createBoard, checkWinner } = require('./board');
-const State = require('../models/state');
+const { createBoard, checkWinner, emptyField } = require('./board');
+const State = require('./state');
 
 class Game {
   constructor(size = 5, players = ['X', 'O', 'T']) {
@@ -37,15 +37,17 @@ class Game {
   }
 
   undoMove() {
-    this.states.pop();
-    this.currentPlayerId = (this.currentPlayerId - 1) % this.players.length;
+    if (this.states.length !== 1) {
+      this.states.pop();
+      this.currentPlayerId = Math.abs(this.currentPlayerId - 1) % this.players.length;
+    }
   }
 
   validateMove(move) {
     if ((move.row >= this.size || move.row < 0) || (move.col >= this.size || move.col < 0)) {
       throw new Error('The move is invalid');
     }
-    if (this.board[move.row][move.col] !== ' ') {
+    if (this.board[move.row][move.col] !== emptyField) {
       throw new Error('Move already made');
     }
   }
