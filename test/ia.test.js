@@ -1,6 +1,6 @@
 const { expect } = require('chai');
 const { createBoard } = require('../src/models/board');
-const minimax = require('../src/ai/minimax');
+const minimax = require('../src/ai');
 
 describe('Minimax', () => {
   it('T1', () => {

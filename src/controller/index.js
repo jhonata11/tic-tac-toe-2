@@ -1,47 +1,46 @@
-const { nextMove } = require('../ai/minimax');
-
-const resumePlay = (move, game) => {
-  try {
-    const winner = game.makeMove(move);
-    if (winner) {
-      // TODO: do the winner thing
-      console.log(`We have a winner: ${winner.player}`);
-      process.exit();
-    } else {
-      printBoard(game.board);
-      if (game.currentPlayer === 'T') {
-        // computer turn
-        game.makeMove(nextMove(game.board));
-        printBoard(game.board);
-      }
-    }
-  } catch (e) {
-    console.log(e);
-  }
-};
+const AI = require('../ai');
+const Game = require('../models/game');
 
 class Controller {
-  constructor(game, view) {
-    this.game = game;
-    this.view = view;
-    this.startGame();
+  constructor(gameSize, players, cli) {
+    this.gameSize = gameSize;
+    this.players = players;
+    this.cli = cli;
+    this.game = null;
+
+    // method binding
+    this.start = this.start.bind(this);
+    this.dealWithVictory = this.dealWithVictory.bind(this);
+    this.readMove = this.readMove.bind(this);
   }
 
-  resumePlay(move) {
+  start() {
+    this.game = new Game(this.gameSize, this.players.map(({ name }) => name));
+    this.cli.printBoard(this.game.board, this.game.players);
+  }
+
+  dealWithVictory(winner) {
+    this.cli.printBoard(this.game.board, this.game.players);
+    this.cli.showWinner(winner.player);
+    process.exit(0);
+  }
+
+  readMove(move) {
     try {
       const winner = this.game.makeMove(move);
       if (winner) {
-        process.exit();
+        this.dealWithVictory(winner);
       } else {
-        this.view.showBoard(this.game.board);
-        // if (game.currentPlayer === 'T') {
-        //   // computer turn
-        //   game.makeMove(nextMove(game.board));
-        //   printBoard(game.board);
-        // }
+        const nextPlayer = this.players[this.game.currentPlayerId];
+        if (nextPlayer.human) {
+          this.cli.printBoard(this.game.board, this.game.players);
+          this.cli.showCurrentPlayer(this.game.currentPlayerId, this.game.currentPlayer);
+        } else {
+          this.readMove(AI.nextMove(this.game.board));
+        }
       }
     } catch (e) {
-      console.log(e);
+      this.cli.printError(e.message);
     }
   }
 }

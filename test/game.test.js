@@ -25,47 +25,6 @@ describe('--- game', () => {
     expect(game.board[0][1]).to.eql('O');
   });
 
-  it('should save last move and board ', () => {
-    const game = new Game();
-    // assert first move
-    game.makeMove({ row: 0, col: 0 });
-    expect(game.states).to.have.length(2);
-    expect(game.states[1].board).to.deep.equal(game.board);
-    expect(game.states[1].move).to.deep.equal({ row: 0, col: 0 });
-    expect(game.states[1].playerId).to.equal(0);
-
-    // assert second move
-    game.makeMove({ row: 0, col: 1 });
-    expect(game.states[2].board).to.deep.equal(game.board);
-    expect(game.states[2].move).to.deep.equal(game.lastMove);
-    expect(game.states[2].playerId).to.equal(1);
-
-    // assert last play was different from previous
-    expect(game.states[2].board).to.not.deep.equal(game.states[1].board);
-    expect(game.states[2].move).to.not.deep.equal(game.states[1].move);
-    expect(game.states[2].playerId).to.not.equal(game.states[1].playerId);
-  });
-
-  it('should undo last move ', () => {
-    const game = new Game();
-    // assert first move
-    game.makeMove({ row: 0, col: 0 });
-    game.makeMove({ row: 0, col: 1 });
-    game.undoMove();
-    expect(game.states).to.have.length(2);
-    expect(game.currentPlayerId).to.eql(1);
-  });
-
-  it('should reset stop undo if theres no state left', () => {
-    const game = new Game();
-    // assert first move
-    game.makeMove({ row: 0, col: 0 });
-    game.undoMove();
-    game.undoMove();
-    expect(game.states).to.have.length(1);
-    expect(game.currentPlayerId).to.eql(0);
-  });
-
   describe('Winning', () => {
     it('should return winner when winning move is made', () => {
       const moves = [0, 1, 2, 3];

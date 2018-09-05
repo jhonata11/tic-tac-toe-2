@@ -18,7 +18,6 @@ const validateDirection = (board, move, getCurrentPosition) => {
       const currentPosition = getCurrentPosition({ size, move, index: i });
       const currentPlayer = board[currentPosition.row][currentPosition.col];
       positions = (currentPlayer === playerId) ? [...positions, currentPosition] : [];
-
       if (positions.length >= size) {
         return { positions, player: playerId };
       }

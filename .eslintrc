@@ -11,6 +11,7 @@
         "allowForLoopAfterthoughts": true
       }
     ],
-    "no-return-assign": ["error", "except-parens"]
+    "no-return-assign": ["error", "except-parens"],
+    "linebreak-style":"off"
   }
 }
