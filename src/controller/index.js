@@ -2,10 +2,10 @@ const AI = require('../ai');
 const Game = require('../models/game');
 
 class Controller {
-  constructor(gameSize, players, cli) {
+  constructor(gameSize, players, view) {
     this.gameSize = gameSize;
     this.players = players;
-    this.cli = cli;
+    this.view = view;
     this.game = null;
 
     // method binding
@@ -16,12 +16,12 @@ class Controller {
 
   start() {
     this.game = new Game(this.gameSize, this.players.map(({ name }) => name));
-    this.cli.printBoard(this.game.board, this.game.players);
+    this.view.showBoard(this.game.board, this.game.players);
   }
 
   dealWithVictory(winner) {
-    this.cli.printBoard(this.game.board, this.game.players);
-    this.cli.showWinner(winner.player);
+    this.view.showBoard(this.game.board, this.game.players);
+    this.view.notifyWinner(winner.player);
     process.exit(0);
   }
 
@@ -33,14 +33,14 @@ class Controller {
       } else {
         const nextPlayer = this.players[this.game.currentPlayerId];
         if (nextPlayer.human) {
-          this.cli.printBoard(this.game.board, this.game.players);
-          this.cli.showCurrentPlayer(this.game.currentPlayerId, this.game.currentPlayer);
+          this.view.showBoard(this.game.board, this.game.players);
+          this.view.showCurrentPlayer(this.game.currentPlayerId, this.game.currentPlayer);
         } else {
           this.readMove(AI.nextMove(this.game.board));
         }
       }
     } catch (e) {
-      this.cli.printError(e.message);
+      this.view.notifyError(e.message);
     }
   }
 }

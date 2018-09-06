@@ -12,5 +12,5 @@ try {
   controller.start();
   cli.start(controller.readMove);
 } catch (error) {
-  cli.printError(error.message);
+  cli.notifyError(error.message);
 }
