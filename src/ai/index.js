@@ -28,7 +28,9 @@ const createTree = (board, players, player, depth = 0) => {
 
   if (depth < 2) {
     child.forEach((node) => {
+      /* eslint no-param-reassign: 0 */
       node.child = createTree(node.board, players, player, depth + 1);
+      /* eslint no-param-reassign: 1 */
     });
   }
   return child;

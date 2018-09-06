@@ -3,7 +3,7 @@ const { createBoard } = require('../src/models/board');
 const evaluator = require('../src/ai/evaluator');
 const minimax = require('../src/ai');
 
-describe('Minimax', () => {
+describe('AI', () => {
   it('should return the next move', () => {
     const board = createBoard(3);
     board[0][0] = 'X';
