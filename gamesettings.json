@@ -1,17 +1,15 @@
 {
   "players": [
     {
-      "name": "X",
-      "human": true
+      "name": "X"
     },
     {
-      "name": "O",
-      "human": true
+      "name": "O"
     },
     {
-      "name": "T",
-      "human": false
+      "name": "A",
+      "computer": true
     }
   ],
-  "gameSize": 5
+  "gameSize": 4
 }

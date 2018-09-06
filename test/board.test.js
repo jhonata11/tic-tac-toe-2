@@ -13,13 +13,11 @@ describe('--- createBoard', () => {
     });
   });
 
-  it('should have length between 3 and 10', () => {
+  it('should throw error if size is less than 1', () => {
     // error
-    expect(() => Board.createBoard(11)).to.throw('Board length should be between 0 and 3');
-    expect(() => Board.createBoard(2)).to.throw('Board length should be between 0 and 3');
+    expect(() => Board.createBoard(0)).to.throw('Board size should be bigger than 1');
     // ok
-    expect(() => Board.createBoard(10)).to.not.throw();
-    expect(() => Board.createBoard(3)).to.not.throw();
+    expect(() => Board.createBoard(1)).to.not.throw();
   });
 });
 
