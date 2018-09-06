@@ -1,7 +1,7 @@
 const { expect } = require('chai');
 const Game = require('../src/models/game');
 
-describe('--- game', () => {
+describe('Game tests', () => {
   it('should create a default game', () => {
     const game = new Game();
     expect(game.board).to.have.length(5);
@@ -25,7 +25,7 @@ describe('--- game', () => {
     expect(game.board[0][1]).to.eql('O');
   });
 
-  describe('Winning', () => {
+  describe('winning', () => {
     it('should return winner when winning move is made', () => {
       const moves = [0, 1, 2, 3];
       const game = new Game(5, ['X', 'T']);
@@ -48,7 +48,7 @@ describe('--- game', () => {
     });
   });
 
-  describe('Exceptions', () => {
+  describe('validations', () => {
     it('should throw error if a move is repeated', () => {
       const game = new Game();
       const move = { row: 0, col: 0 };
@@ -62,6 +62,15 @@ describe('--- game', () => {
       expect(() => game.makeMove({ row: -1, col: 0 })).to.throw('The move is invalid');
       expect(() => game.makeMove({ row: 0, col: 5 })).to.throw('The move is invalid');
       expect(() => game.makeMove({ row: 0, col: -1 })).to.throw('The move is invalid');
+    });
+
+    it('should throw error if move is wrong pattern', () => {
+      const game = new Game();
+      expect(() => game.makeMove(null)).to.throw('The move is invalid');
+      expect(() => game.makeMove({ row: 0 })).to.throw('The move is invalid');
+      expect(() => game.makeMove({ col: 0 })).to.throw('The move is invalid');
+      expect(() => game.makeMove({ row: 't', col: 0 })).to.throw('The move is invalid');
+      expect(() => game.makeMove({ row: 0, col: 'y' })).to.throw('The move is invalid');
     });
   });
 });

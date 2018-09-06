@@ -10,7 +10,12 @@ try {
   }
   const controller = new Controller(cli);
   controller.start(gameSize, players);
-  cli.start(controller.readMove);
+
+  const handleMove = (move) => {
+    controller.readMove(move, () => process.exit(0));
+  };
+
+  cli.start(handleMove);
 } catch (error) {
   cli.notifyError(error.message);
 }

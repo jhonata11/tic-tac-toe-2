@@ -2,7 +2,7 @@ const { expect } = require('chai');
 const Board = require('../src/models/board');
 
 
-describe('--- createBoard', () => {
+describe('Board tests', () => {
   it('should create the board with all fields set as blank space', () => {
     const size = 5;
     const board = Board.createBoard(size);
@@ -14,9 +14,7 @@ describe('--- createBoard', () => {
   });
 
   it('should throw error if size is less than 1', () => {
-    // error
     expect(() => Board.createBoard(0)).to.throw('Board size should be bigger than 1');
-    // ok
     expect(() => Board.createBoard(1)).to.not.throw();
   });
 });

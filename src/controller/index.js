@@ -10,7 +10,7 @@ class Controller {
 
     // method binding
     this.start = this.start.bind(this);
-    this.dealWithVictory = this.dealWithVictory.bind(this);
+    this.handleWin = this.handleWin.bind(this);
     this.readMove = this.readMove.bind(this);
   }
 
@@ -22,17 +22,18 @@ class Controller {
     this.view.showBoard(this.game.board, this.game.players);
   }
 
-  dealWithVictory(winner) {
+  handleWin(winner) {
     this.view.showBoard(this.game.board, this.game.players);
     this.view.notifyWinner(winner.player);
-    process.exit(0);
+    // process.exit(0);
   }
 
-  readMove(move) {
+  readMove(move, handleWin) {
     try {
       const winner = this.game.makeMove(move);
       if (winner) {
-        this.dealWithVictory(winner);
+        this.handleWin(winner);
+        handleWin();
       } else {
         const nextPlayer = this.players[this.game.currentPlayerId];
         if (nextPlayer.computer) {

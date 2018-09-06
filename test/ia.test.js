@@ -10,11 +10,11 @@ describe('Minimax', () => {
     expect(move).to.eql({ row: 1, col: 1 });
   });
 
-  it('T2', () => {
+  it.only('T2', () => {
     const board = createBoard(3);
     board[1][1] = 'X';
-    board[0][0] = 'T';
     board[0][1] = 'X';
+    board[0][0] = 'T';
     const move = minimax.nextMove(board);
     expect(move).to.eql({ row: 2, col: 2 });
   });

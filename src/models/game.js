@@ -22,7 +22,7 @@ class Game {
   }
 
   validateMove(move) {
-    if (!move) {
+    if (!move || !Number.isInteger(move.row) || !Number.isInteger(move.col)) {
       throw new Error('The move is invalid');
     }
     if ((move.row >= this.size || move.row < 0) || (move.col >= this.size || move.col < 0)) {
