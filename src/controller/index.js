@@ -25,7 +25,6 @@ class Controller {
   handleWin(winner) {
     this.view.showBoard(this.game.board, this.game.players);
     this.view.notifyWinner(winner.player);
-    // process.exit(0);
   }
 
   readMove(move, handleWin) {
@@ -37,7 +36,7 @@ class Controller {
       } else {
         const nextPlayer = this.players[this.game.currentPlayerId];
         if (nextPlayer.computer) {
-          this.readMove(AI.nextMove(this.game.board));
+          this.readMove(AI.nextMove(this.game.board, this.game.currentPlayer));
         } else {
           this.view.showBoard(this.game.board, this.game.players);
           this.view.showCurrentPlayer(this.game.currentPlayerId, this.game.currentPlayer);

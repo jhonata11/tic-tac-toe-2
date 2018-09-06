@@ -19,7 +19,7 @@ describe('Board tests', () => {
   });
 });
 
-describe('--- checkWinner', () => {
+describe('winning', () => {
   it('should have a winner horizontally', () => {
     const rows = [0, 1, 2, 3, 4];
     rows.forEach((row) => {
