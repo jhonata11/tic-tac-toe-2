@@ -1,6 +1,11 @@
 const AI = require('../ai');
 const Game = require('../models/game');
 
+/**
+  * A controller for the game tic tac toe 2.0
+  * @constructor
+  * @param {object} view - a view instance
+  */
 class Controller {
   constructor(view) {
     this.gameSize = 0;
@@ -14,6 +19,11 @@ class Controller {
     this.readMove = this.readMove.bind(this);
   }
 
+  /**
+  * Starts a new game.
+  * @param {integer} gameSize - The size of the board.
+  * @param {array} players - Array of string containing the players.
+  */
   start(gameSize, players) {
     this.gameSize = gameSize;
     this.players = players;
@@ -27,6 +37,13 @@ class Controller {
     this.view.notifyWinner(winner.player);
   }
 
+
+  /**
+  * Handles the input of a move, updating the view or, if the next player is an AI,
+  * calling itself recursivally.
+  * @param {object} move - the given move.
+  *  @param {function} handleWin - a function called when a player wins.
+  */
   readMove(move, handleWin) {
     try {
       const winner = this.game.makeMove(move);
@@ -57,7 +74,9 @@ class Controller {
     if (!this.players.every(player => player.name)) {
       throw Error('All players must have a name');
     }
-
+    if (!this.players.every(player => player.name.length === 1)) {
+      throw Error('All players must have a name with length 1');
+    }
     if (this.players.filter(player => player.computer).length !== 1) {
       throw Error('One of the players must be a computer');
     }

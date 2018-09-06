@@ -105,6 +105,18 @@ describe('Controller tests', () => {
       expect(() => controller.start(5, players)).to.not.throw();
     });
 
+    it('should throw error if one of the players have a large name', () => {
+      const players = [player('A'), player('B'), player('C', true)];
+      const firstLargeName = [player('big name'), player('B'), player('C', true)];
+      const secondLarge = [player('A'), player('big name'), player('C', true)];
+      const thirdLargeName = [player('A'), player('B'), player('big name', true)];
+
+      expect(() => controller.start(5, firstLargeName)).to.throw('All players must have a name with length 1');
+      expect(() => controller.start(5, secondLarge)).to.throw('All players must have a name with length 1');
+      expect(() => controller.start(5, thirdLargeName)).to.throw('All players must have a name with length 1');
+      expect(() => controller.start(5, players)).to.not.throw();
+    });
+
     it('should throw error if one of the players is not a computer', () => {
       const players = [player('A'), player('B'), player('C', true)];
       const zeroComputer = [player('A'), player('B'), player('C')];

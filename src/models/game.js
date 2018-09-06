@@ -1,5 +1,11 @@
 const { createBoard, checkWinner, emptyField } = require('./board');
 
+/**
+ * Represents a game of tic tac toe 2.0
+ * @constructor
+ * @param {integer} size - The size of the board.
+ * @param {array} players - Array of string containing the players.
+ */
 class Game {
   constructor(size = 5, players = ['X', 'O', 'T']) {
     this.size = size;
@@ -12,6 +18,11 @@ class Game {
     return this.players[this.currentPlayerId];
   }
 
+  /**
+   * Proceed a move on the game.
+   * @param {object} move - the move that is going to be made. with the patter { row, col }
+   * @returns an object containing the player that won that game and the coordinates of the victory.
+   */
   makeMove(move) {
     this.validateMove(move);
     const newBoard = this.board.map(row => [...row]);

@@ -4,12 +4,12 @@ const evaluator = require('../src/ai/evaluator');
 const minimax = require('../src/ai');
 
 describe('Minimax', () => {
-  it('T1', () => {
+  it('should return the next move', () => {
     const board = createBoard(3);
     board[0][0] = 'X';
     board[0][1] = 'O';
     const move = minimax.nextMove(board, ['X', 'O', 'T'], 'T');
-    expect(move).to.eql({ row: 1, col: 1 });
+    expect(move).to.eql({ row: 0, col: 2 });
   });
 
   describe('evaluator', () => {

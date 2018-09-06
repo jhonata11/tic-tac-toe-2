@@ -8,6 +8,15 @@ const diagonalRight = ({ index }) => ({ row: index, col: index });
 
 const diagonalLeft = ({ size, index }) => ({ row: index, col: size - index - 1 });
 
+
+/**
+ * Validate if a theres a winner on same direction in a specific board.
+ * @param {array} board - the board to validate
+ * @param {object} move - the move that is going to be made. with the patter { row, col }
+ * @param {function} getCurrentPosition - a functiond that must return the coordinate of the
+ *  next validation given an index.
+ * @returns an object containing the player that won that game and the coordinates of the victory.
+ */
 const validateDirection = (board, move, getCurrentPosition) => {
   let positions = [];
   const size = board[0].length;

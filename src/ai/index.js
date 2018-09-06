@@ -1,6 +1,5 @@
 const evaluator = require('./evaluator');
 
-
 const availableBoards = (board, moves, player) => (
   moves.map((move) => {
     const newBoard = board.map(row => [...row]);
