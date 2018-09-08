@@ -30,6 +30,7 @@ class Controller {
     this.validateGame();
     this.game = new Game(this.gameSize, this.players.map(({ name }) => name));
     this.view.showBoard(this.game.board, this.game.players);
+    this.view.showCurrentPlayer();
   }
 
   handleWin(winner) {

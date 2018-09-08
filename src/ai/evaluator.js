@@ -4,8 +4,14 @@ const evaluateRow = (row, player) => {
   const unempty = row.filter(e => e !== Board.emptyField);
   const others = unempty.filter(e => e !== player);
   if (others.length !== 0) {
+    // decreate the the value if theres an other player almost winning
+    const uniqueOthers = [...new Set(others)];
+    if (uniqueOthers.length === 1) {
+      return (others.length ** 2) * -1;
+    }
     return 0;
   }
+  // decreate the the value if player is ready to win
   const playerLength = unempty.filter(e => e === player).length;
   return (playerLength ** 2);
 };
@@ -39,7 +45,6 @@ module.exports = {
     }
     value += evaluateRow(diagonal1, value, player);
     value += evaluateRow(diagonal2, value, player);
-
     return value;
   },
 };

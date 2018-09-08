@@ -1,10 +1,9 @@
-/* eslint no-unused-expressions: 0 */ // --> OFF
+/* eslint no-unused-expressions: 0 */ // eslint expect().to.be.true
 const { expect } = require('chai');
 const sinon = require('sinon');
 const AI = require('../src/ai');
 const Controller = require('../src/controller');
 
-// const emptyFunction = e => e;
 const player = (name, computer = false) => ({ name, computer });
 
 describe('Controller tests', () => {
@@ -27,6 +26,8 @@ describe('Controller tests', () => {
     expect(controller.game).to.not.be.null;
     expect(controller.gameSize).to.eql(5);
     expect(controller.players).to.have.length(3);
+    expect(cli.showCurrentPlayer.called).to.be.true;
+    expect(cli.showBoard.called).to.be.true;
   });
 
   describe('gameplay', () => {
@@ -46,7 +47,7 @@ describe('Controller tests', () => {
 
       expect(cli.showBoard.callCount).to.eql(3);
       // should not display next player when is AI turn
-      expect(cli.showCurrentPlayer.callCount).to.eql(2);
+      expect(cli.showCurrentPlayer.callCount).to.eql(3);
     });
 
     it('should notify on invalid movement', () => {
