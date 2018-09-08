@@ -1,4 +1,3 @@
-
 const { readFileSync } = require('fs');
 const cli = require('./view');
 const Controller = require('./controller');

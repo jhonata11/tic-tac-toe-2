@@ -3,7 +3,7 @@ const readLine = require('readline');
 const colorizer = require('./colorizer');
 const alphabet = require('./alphabet');
 const {
-  BLUE, GREEN, MAGENTA, CYAN, YELLOW, RED,
+  BLUE, MAGENTA, CYAN, YELLOW, RED,
 } = require('./colors');
 
 const parseMove = (input) => {
@@ -25,7 +25,7 @@ module.exports = {
   },
 
   notifyWinner: (message) => {
-    console.log(`The winner is ${colorizer[GREEN](message)}`);
+    console.log(`The winner is ${colorizer[YELLOW](message)}`);
   },
 
   notifyError: (message) => {
