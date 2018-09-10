@@ -1,16 +1,6 @@
 const AI = require('../ai');
 const Game = require('../models/game');
 
-function shuffleArray(array) {
-  const shuffled = [...array];
-  for (let i = shuffled.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    // eslint-disable-line no-param-reassign
-    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
-  }
-  return shuffled;
-}
-
 /**
   * A controller for the game tic tac toe 2.0
   * @constructor
