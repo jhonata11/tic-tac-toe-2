@@ -42,7 +42,6 @@ describe('Controller tests', () => {
 
     it('should change call AI automatically when is their turn', () => {
       controller.start(3, [player('A'), player('B'), player('C', true)], false);
-      
       controller.readMove({ row: 0, col: 0 });
       controller.readMove({ row: 0, col: 1 });
 
