@@ -34,9 +34,9 @@ class Controller {
   * @param {integer} gameSize - The size of the board.
   * @param {array} players - Array of string containing the players.
   */
-  start(gameSize, players) {
+  start(gameSize, players, shuffle = true) {
     this.gameSize = gameSize;
-    this.players = Controller.shufflePlayers(players);
+    this.players = shuffle ? Controller.shufflePlayers(players) : players;
     this.validateGame();
     this.game = new Game(this.gameSize, this.players.map(({ name }) => name));
     this.handleNextPlayer();

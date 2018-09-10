@@ -34,14 +34,15 @@ describe('Controller tests', () => {
     it('should change game when a move is read', () => {
       controller.start(3, [player('A'), player('B'), player('C', true)]);
       controller.readMove({ row: 0, col: 0 });
-      expect(controller.game.board[0][0]).to.eql('A');
+      expect(controller.game.board[0][0]).to.not.eql(' ');
       // validate functions called
       expect(cli.showBoard.called).to.be.true;
       expect(cli.showCurrentPlayer.called).to.be.true;
     });
 
     it('should change call AI automatically when is their turn', () => {
-      controller.start(3, [player('A'), player('B'), player('C', true)]);
+      controller.start(3, [player('A'), player('B'), player('C', true)], false);
+      
       controller.readMove({ row: 0, col: 0 });
       controller.readMove({ row: 0, col: 1 });
 
@@ -60,8 +61,7 @@ describe('Controller tests', () => {
       const stubAi = sinon.stub(AI, 'nextMove');
       stubAi.onCall(0).returns({ row: 2, col: 0 });
       stubAi.onCall(1).returns({ row: 2, col: 1 });
-
-      controller.start(3, [player('A'), player('B'), player('C', true)]);
+      controller.start(3, [player('A'), player('B'), player('C', true)], false);
       controller.readMove({ row: 0, col: 0 });
       controller.readMove({ row: 1, col: 0 });
 
