@@ -1,6 +1,16 @@
 const AI = require('../ai');
 const Game = require('../models/game');
 
+function shuffleArray(array) {
+  const shuffled = [...array];
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    // eslint-disable-line no-param-reassign
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+  }
+  return shuffled;
+}
+
 /**
   * A controller for the game tic tac toe 2.0
   * @constructor
@@ -19,6 +29,16 @@ class Controller {
     this.readMove = this.readMove.bind(this);
   }
 
+  static shufflePlayers(players) {
+    const shuffled = [...players];
+    for (let i = shuffled.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      // eslint-disable-line no-param-reassign
+      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    }
+    return shuffled;
+  }
+
   /**
   * Starts a new game.
   * @param {integer} gameSize - The size of the board.
@@ -26,11 +46,10 @@ class Controller {
   */
   start(gameSize, players) {
     this.gameSize = gameSize;
-    this.players = players;
+    this.players = Controller.shufflePlayers(players);
     this.validateGame();
     this.game = new Game(this.gameSize, this.players.map(({ name }) => name));
-    this.view.showBoard(this.game.board, this.game.players);
-    this.view.showCurrentPlayer(this.game.currentPlayerId, this.game.currentPlayer);
+    this.handleNextPlayer();
   }
 
   handleWin(winner) {
@@ -52,16 +71,20 @@ class Controller {
         this.handleWin(winner);
         handleWin();
       } else {
-        const nextPlayer = this.players[this.game.currentPlayerId];
-        if (nextPlayer.computer) {
-          this.readMove(AI.nextMove(this.game.board, this.game.currentPlayer));
-        } else {
-          this.view.showBoard(this.game.board, this.game.players);
-          this.view.showCurrentPlayer(this.game.currentPlayerId, this.game.currentPlayer);
-        }
+        this.handleNextPlayer();
       }
     } catch (e) {
       this.view.notifyError(e.message);
+    }
+  }
+
+  handleNextPlayer() {
+    const nextPlayer = this.players[this.game.currentPlayerId];
+    if (nextPlayer.computer) {
+      this.readMove(AI.nextMove(this.game.board, this.game.currentPlayer));
+    } else {
+      this.view.showBoard(this.game.board, this.game.players);
+      this.view.showCurrentPlayer(this.game.currentPlayerId, this.game.currentPlayer);
     }
   }
 
